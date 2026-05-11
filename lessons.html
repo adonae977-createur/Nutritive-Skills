@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4CAF50">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" href="icon.svg">
+    <title>Quick Lessons - Nutritive Skills</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            animation: bounceIn 1s ease-out;
+        }
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0 0 0;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s, transform 0.3s;
+        }
+        nav a:hover {
+            color: #e8f5e8;
+            transform: translateY(-2px);
+        }
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .lesson-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .lesson-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .lesson-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(76, 175, 80, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        .lesson-card:hover::before {
+            left: 100%;
+        }
+        .lesson-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+        }
+        .lesson-card h3 {
+            color: #4CAF50;
+            margin-top: 0;
+            font-size: 1.2rem;
+        }
+        .lesson-card p {
+            margin-bottom: 1rem;
+        }
+        .lesson-content {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            animation: expand 0.3s ease-out;
+        }
+        @keyframes expand {
+            from { opacity: 0; max-height: 0; }
+            to { opacity: 1; max-height: 500px; }
+        }
+        .quiz-section {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: #e8f5e8;
+            border-radius: 10px;
+            display: none;
+        }
+        .quiz-question {
+            margin-bottom: 1rem;
+        }
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .quiz-option {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .quiz-option:hover {
+            background-color: #45a049;
+        }
+        .quiz-option.correct {
+            background-color: #28a745;
+            animation: pulse 0.6s;
+        }
+        .quiz-option.wrong {
+            background-color: #dc3545;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .progress-tracker {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: none;
+        }
+        .progress-bar {
+            width: 200px;
+            height: 10px;
+            background-color: #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 0.5rem 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background-color: #4CAF50;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            main {
+                padding: 1rem;
+            }
+            .progress-tracker {
+                position: static;
+                margin: 1rem 0;
+            }
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+        footer nav a {
+            margin: 0 0.5rem;
+            color: #4CAF50;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Quick Nutrition Lessons</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="diabetes.html">Diabetes Programs</a></li>
+                <li><a href="dashboard.html">Progress Dashboard</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="progress-tracker" id="progress-tracker">
+        <h4>Lesson Progress</h4>
+        <div class="progress-bar">
+            <div class="progress-fill" id="overall-progress"></div>
+        </div>
+        <p id="progress-text">0 of 6 lessons completed</p>
+    </div>
+
+    <main>
+        <section>
+            <h2>Interactive Nutrition Lessons for Students</h2>
+            <p>Click on any lesson card to expand and learn. Complete the quiz at the end of each lesson to track your progress!</p>
+        </section>
+
+        <div class="lesson-grid">
+            <div class="lesson-card" onclick="toggleLesson('basics')">
+                <h3>Nutrition Basics</h3>
+                <p>Learn the fundamental building blocks of nutrition and why they're important for your body.</p>
+                <div id="basics-content" class="lesson-content">
+                    <h4>What are Nutrients?</h4>
+                    <p>Nutrients are substances in food that provide energy and help your body function. There are six main types:</p>
+                    <ul>
+                        <li><strong>Carbohydrates:</strong> Main source of energy</li>
+                        <li><strong>Proteins:</strong> Build and repair body tissues</li>
+                        <li><strong>Fats:</strong> Store energy and support cell function</li>
+                        <li><strong>Vitamins:</strong> Support immune system and metabolism</li>
+                        <li><strong>Minerals:</strong> Essential for bone health and fluid balance</li>
+                        <li><strong>Water:</strong> Vital for all bodily functions</li>
+                    </ul>
+                    <div class="quiz-section" id="basics-quiz">
+                        <h4>Quick Quiz</h4>
+                        <div class="quiz-question">Which nutrient is the main source of energy for the body?</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="checkAnswer(this, 0, 'basics')">Proteins</button>
+                            <button class="quiz-option" onclick="checkAnswer(this, 1, 'basics')">Carbohydrates</button>
+                            <button class="quiz-option" onclick="checkAnswer(this, 2, 'basics')">Vitamins</button>
+                            <button class="quiz-option" onclick="checkAnswer(this, 3, 'basics')">Minerals</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lesson-card" onclick="toggleLesson('balance')">
+                <h3>Balanced Plate</h3>
+                <p>Discover how to create meals that provide all the nutrients your body needs.</p>
+                <div id="balance-content" class="lesson-content">
+                    <h4>The Plate Method</h4>
+                    <p>A balanced meal should include:</p>
+                    <ul>
+                        <li>½ plate: Non-starchy vegetables (broccoli, spinach, carrots)</li>
+                        <li>¼ plate: Lean protein (chicken, fish, beans, tofu)</li>
+                        <li>¼ plate: Whole grains or starchy vegetables (brown rice, sweet potatoes)</li>
+                        <li>A serving of fruit and dairy (or alternatives)</li>
+                    </ul>
+                    <p>This method ensures you get a variety of nutrients and helps control portion sizes.</p>
+                    <div class="quiz-section" id="balance-quiz">
+                        <h4>Quick Quiz</h4>
+                        <div class="quiz-question">What should take up half of your plate?</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="checkAnswer(this, 0, 'balance')">Proteins</button>
+                            <button class="quiz-option" onclick="checkAnswer(this, 1, 'balance')">Non-starchy vegetables</button>
+                            <button class="quiz-option" onclick="checkAnswer(this, 2, 'balance')">Grains</button>
+                            <button class="quiz-option" onclick="checkAnswer(this, 3, 'balance')">Fruits</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lesson-card" onclick="toggleLesson('labels')">
+                <h3>Reading Food Labels</h3>
+                <p>Learn to decode nutrition labels and make informed food choices.</p>
+                <div id="labels-content" class="lesson-content">
+                    <h4>Key Parts of a Nutrition Label</h4>
+                    <ul>
+                        <li><strong>Serving Size:</strong> The amount of food in one serving</li>
+                        <li><strong>Calories:</strong> Energy from one serving</li>
+                        <li><strong>Nutrients:</strong> Amounts of fats, carbs, proteins, vitamins</li>
+                        <li><strong>% Daily Value:</strong> How much of your daily needs this provides</li>
+                        <li><strong>Ingredients List:</strong> What's in the food (in order of quantity)</li>
+                    </ul>
+                    <p>Look for foods with low added sugars, sodium, and saturated fats.</p>
+                    <div class="quiz-section" id="labels-quiz">
+                        <h4>Quick Quiz</h4>
+                        <div class="quiz-question">What does % Daily Value tell you?</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="checkAnswer(this, 0, 'labels')">How much you should eat daily</button>
+                            <button class="quiz-option" onclick="checkAnswer(this, 1, 'labels')">How much of daily needs this serving provides</button>
+                            <button class="quiz-option" onclick="checkAnswer(this, 2, 'labels')">The price of the food</button>
+                            <button class="quiz-option" onclick="checkAnswer(this, 3, 'labels')">The expiration date</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lesson-card" onclick="toggleLesson('hydration')">
+                <h3>Importance of Hydration</h3>
+                <p>Understand why water is crucial for health and how to stay properly hydrated.</p>
+                <div id="hydration-content" class="lesson-content">
+                    <h4>Why Hydration Matters</h4>
+                    <p>Water is essential for:</p>
+                    <ul>
+                        <li>Regulating body temperature</li>
+                        <li>Transporting nutrients and oxygen</li>
+                        <li>Removing waste products</li>
+                        <li>Lubricating joints</li>
+                        <li>Digesting food</li>
+                    </ul>
+                    <p>Signs of dehydration: dry mouth, fatigue, dizziness, dark urine.</p>
+                    <p>Aim for 8-10 glasses (2-3 liters) of water daily, more if you're active.</p>
+                    <div class="quiz-section" id="hydration-quiz">
+                        <h4>Quick Quiz</h4>
+                        <div class="quiz-question">How much water should you aim to drink daily?</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="checkAnswer(this, 0, 'hydration')">4-6 glasses</button>
+                            <button class="quiz-option" onclick="checkAnswer(this, 1, 'hydration')">8-10 glasses</button>
+                            <button class="quiz-option" onclick="checkAnswer(this, 2, 'hydration')">12-14 glasses</button>
+                            <button class="quiz-option" onclick="checkAnswer(this, 3, 'hydration')">16+ glasses</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lesson-card" onclick="toggleLesson('snacks')">
+                <h3>Healthy Snacking</h3>
+                <p>Learn how to choose nutritious snacks that keep you energized between meals.</p>
+                <div id="snacks-content" class="lesson-content">
+                    <h4>Smart Snack Choices</h4>
+                    <p>Healthy snacks combine protein, fiber, and healthy fats:</p>
+                    <ul>
+                        <li>Apple slices with peanut butter</li>
+                        <li>Greek yogurt with berries</li>
+                        <li>Carrot sticks with hummus</li>
+                        <li>Handful of nuts and dried fruit</li>
+                        <li>Whole grain crackers with cheese</li>
+                    </ul>
+                    <p>Avoid snacks high in added sugars, salt, or unhealthy fats.</p>
+                    <div class="quiz-section" id="snacks-quiz">
+                        <h4>Quick Quiz</h4>
+                        <div class="quiz-question">Which is NOT a good healthy snack combination?</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="checkAnswer(this, 0, 'snacks')">Apple with peanut butter</button>
+                            <button class="quiz-option" onclick="checkAnswer(this, 1, 'snacks')">Yogurt with berries</button>
+                            <button class="quiz-option" onclick="checkAnswer(this, 2, 'snacks')">Candy bar</button>
+                            <button class="quiz-option" onclick="checkAnswer(this, 3, 'snacks')">Carrots with hummus</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lesson-card" onclick="toggleLesson('exercise')">
+                <h3>Nutrition and Exercise</h3>
+                <p>Discover how nutrition supports physical activity and recovery.</p>
+                <div id="exercise-content" class="lesson-content">
+                    <h4>Fueling Your Body</h4>
+                    <p>Before exercise: Eat carbs for energy, some protein for muscle support.</p>
+                    <p>During exercise: Stay hydrated, consume electrolytes if exercising >90 minutes.</p>
+                    <p>After exercise: Eat protein and carbs within 30-60 minutes for recovery.</p>
+                    <p>Daily nutrition: Ensure adequate calories, protein, and micronutrients for active lifestyle.</p>
+                    <div class="quiz-section" id="exercise-quiz">
+                        <h4>Quick Quiz</h4>
+                        <div class="quiz-question">When should you eat for optimal recovery after exercise?</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="checkAnswer(this, 0, 'exercise')">Before exercise only</button>
+                            <button class="quiz-option" onclick="checkAnswer(this, 1, 'exercise')">Within 30-60 minutes after</button>
+                            <button class="quiz-option" onclick="checkAnswer(this, 2, 'exercise')">2-3 hours after</button>
+                            <button class="quiz-option" onclick="checkAnswer(this, 3, 'exercise')">Next day</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let completedLessons = 0;
+        const totalLessons = 6;
+
+        function toggleLesson(lessonId) {
+            const content = document.getElementById(lessonId + '-content');
+            const quiz = document.getElementById(lessonId + '-quiz');
+
+            if (content.style.display === 'none' || content.style.display === '') {
+                content.style.display = 'block';
+                setTimeout(() => {
+                    quiz.style.display = 'block';
+                }, 500);
+            } else {
+                content.style.display = 'none';
+                quiz.style.display = 'none';
+            }
+        }
+
+        function checkAnswer(button, answerIndex, lessonId) {
+            const correctAnswers = {
+                basics: 1, // Carbohydrates
+                balance: 1, // Non-starchy vegetables
+                labels: 1, // How much of daily needs this serving provides
+                hydration: 1, // 8-10 glasses
+                snacks: 2, // Candy bar
+                exercise: 1 // Within 30-60 minutes after
+            };
+
+            const options = button.parentElement.querySelectorAll('.quiz-option');
+            options.forEach(opt => opt.disabled = true);
+
+            if (answerIndex === correctAnswers[lessonId]) {
+                button.classList.add('correct');
+                if (!button.parentElement.hasAttribute('data-completed')) {
+                    completedLessons++;
+                    updateProgress();
+                    button.parentElement.setAttribute('data-completed', 'true');
+                }
+            } else {
+                button.classList.add('wrong');
+                // Highlight correct answer
+                options[correctAnswers[lessonId]].classList.add('correct');
+            }
+        }
+
+        function updateProgress() {
+            const progressFill = document.getElementById('overall-progress');
+            const progressText = document.getElementById('progress-text');
+            const progressPercent = (completedLessons / totalLessons) * 100;
+
+            progressFill.style.width = progressPercent + '%';
+            progressText.textContent = completedLessons + ' of ' + totalLessons + ' lessons completed';
+
+            if (completedLessons === totalLessons) {
+                setTimeout(() => {
+                    alert('Congratulations! You\'ve completed all lessons!');
+                }, 500);
+            }
+
+            // Show progress tracker after first completion
+            if (completedLessons === 1) {
+                document.getElementById('progress-tracker').style.display = 'block';
+            }
+        }
+
+        // Animate lesson cards on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.lesson-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = (index * 0.1) + 's';
+                card.style.animation = 'bounceIn 1s ease-out';
+            });
+        });
+    </script>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(reg => console.log('ServiceWorker registered:', reg.scope))
+                    .catch(err => console.log('ServiceWorker registration failed:', err));
+            });
+        }
+    </script>
+
+    <footer>
+        <p>&copy; 2026 Minerva SASU. All rights reserved.</p>
+        <nav>
+            <a href="index.html">Home</a> | <a href="about.html">About</a> | <a href="contact.html">Contact</a> | <a href="diabetes.html">Diabetes</a> | <a href="dashboard.html">Dashboard</a>
+        </nav>
+    </footer>
+</body>
+</html>
