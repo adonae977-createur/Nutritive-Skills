@@ -121,6 +121,94 @@
             margin-bottom: 1rem;
             color: #1f422d;
         }
+        .skill details {
+            transition: all 0.3s ease;
+        }
+        .skill details[open] {
+            transform: scale(1.02);
+            box-shadow: 0 20px 32px rgba(0, 0, 0, 0.15);
+        }
+        .skill button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.6rem 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 0.5rem;
+        }
+        .skill button:hover {
+            background-color: #3b9a3d;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        .skill .interactive-content {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: #f9fff8;
+            border-radius: 8px;
+            border: 1px solid rgba(76, 175, 80, 0.2);
+            display: none;
+        }
+        .skill .interactive-content.show {
+            display: block;
+            animation: slideDown 0.5s ease;
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hydration-calc input {
+            width: 100%;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .plate-model {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 1rem;
+        }
+        .plate-section {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+        .plate-section:nth-child(1) { background-color: #8BC34A; } /* Veggies */
+        .plate-section:nth-child(2) { background-color: #FFC107; animation-delay: 0.5s; } /* Grains */
+        .plate-section:nth-child(3) { background-color: #FF5722; animation-delay: 1s; } /* Protein */
+        .plate-section:nth-child(4) { background-color: #9C27B0; animation-delay: 1.5s; } /* Fruits */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        .snack-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .snack-item {
+            background-color: #e8f7e8;
+            padding: 0.5rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+        .snack-item:hover {
+            transform: translateY(-3px);
+            background-color: #d4f0d4;
+        }
         .skill summary {
             cursor: pointer;
             font-weight: bold;
@@ -212,6 +300,7 @@
 </head>
 <body>
     <header>
+        <img src="logo.svg" alt="Nutritive Skills Logo" style="vertical-align: middle; margin-right: 0.5rem;">
         <h1>Nutritive Skills FOR ALL FOR FREE </h1>
     
         <nav>
@@ -249,28 +338,106 @@
                 <details>
                     <summary>Meal Planning</summary>
                     <p>Plan balanced meals to ensure you get all necessary nutrients. Click to expand for tips!</p>
-                    <button onclick="alert('Tip: Include a variety of colors in your plate!')">Get a Tip</button>
+                    <button onclick="toggleContent('meal-planning-content')">Get a Tip</button>
+                    <div id="meal-planning-content" class="interactive-content">
+                        <p><strong>Tip:</strong> Include a variety of colors in your plate for diverse nutrients!</p>
+                        <p>Try planning meals around seasonal produce for better flavor and nutrition.</p>
+                    </div>
                 </details>
             </div>
             <div class="skill">
                 <details>
                     <summary>Cooking Techniques</summary>
                     <p>Master basic cooking methods like steaming, grilling, and baking for healthier meals.</p>
-                    <button onclick="alert('Technique: Steaming preserves more nutrients than boiling.')">Learn Technique</button>
+                    <button onclick="toggleContent('cooking-content')">Learn Technique</button>
+                    <div id="cooking-content" class="interactive-content">
+                        <p><strong>Technique:</strong> Steaming preserves more nutrients than boiling.</p>
+                        <p>Experiment with herbs and spices to reduce salt while boosting flavor.</p>
+                    </div>
                 </details>
             </div>
             <div class="skill">
                 <details>
                     <summary>Reading Labels</summary>
                     <p>Understand food labels to make informed choices about ingredients and nutrition facts.</p>
-                    <button onclick="alert('Look for low sodium and high fiber options.')">Label Insight</button>
+                    <button onclick="toggleContent('label-content')">Label Insight</button>
+                    <div id="label-content" class="interactive-content">
+                        <p><strong>Insight:</strong> Look for low sodium and high fiber options.</p>
+                        <p>Check serving sizes to compare products accurately.</p>
+                    </div>
                 </details>
             </div>
             <div class="skill">
                 <details>
                     <summary>Portion Control</summary>
                     <p>Learn to control portions to maintain a healthy weight and avoid overeating.</p>
-                    <button onclick="alert('Use smaller plates to trick your mind into thinking you have more food.')">Portion Trick</button>
+                    <button onclick="toggleContent('portion-content')">Portion Trick</button>
+                    <div id="portion-content" class="interactive-content">
+                        <p><strong>Trick:</strong> Use smaller plates to trick your mind into thinking you have more food.</p>
+                        <p>Eat slowly and savor each bite to recognize fullness cues.</p>
+                    </div>
+                </details>
+            </div>
+            <div class="skill">
+                <details>
+                    <summary>Hydration</summary>
+                    <p>Stay hydrated for better energy, digestion, and overall health.</p>
+                    <button onclick="toggleContent('hydration-content')">Calculate Intake</button>
+                    <div id="hydration-content" class="interactive-content">
+                        <p>Daily water needs vary by activity level and climate.</p>
+                        <div class="hydration-calc">
+                            <label for="weight">Weight (kg):</label>
+                            <input type="number" id="weight" placeholder="70">
+                            <button onclick="calculateWater()">Calculate</button>
+                            <p id="water-result"></p>
+                        </div>
+                    </div>
+                </details>
+            </div>
+            <div class="skill">
+                <details>
+                    <summary>Balanced Diet</summary>
+                    <p>Learn about the components of a balanced plate for optimal nutrition.</p>
+                    <button onclick="toggleContent('balanced-content')">View Plate Model</button>
+                    <div id="balanced-content" class="interactive-content">
+                        <p>Fill half your plate with vegetables, a quarter with grains, and a quarter with protein.</p>
+                        <div class="plate-model">
+                            <div class="plate-section">Veggies<br>50%</div>
+                            <div class="plate-section">Grains<br>25%</div>
+                            <div class="plate-section">Protein<br>25%</div>
+                            <div class="plate-section">Fruits<br>Side</div>
+                        </div>
+                    </div>
+                </details>
+            </div>
+            <div class="skill">
+                <details>
+                    <summary>Healthy Snacking</summary>
+                    <p>Choose nutritious snacks to maintain energy between meals.</p>
+                    <button onclick="toggleContent('snack-content')">Explore Snacks</button>
+                    <div id="snack-content" class="interactive-content">
+                        <p>Opt for snacks with protein, fiber, and healthy fats.</p>
+                        <div class="snack-list">
+                            <div class="snack-item">Apple + Almonds</div>
+                            <div class="snack-item">Greek Yogurt</div>
+                            <div class="snack-item">Carrot Sticks</div>
+                            <div class="snack-item">Trail Mix</div>
+                            <div class="snack-item">Banana</div>
+                            <div class="snack-item">Cheese Stick</div>
+                        </div>
+                    </div>
+                </details>
+            </div>
+            <div class="skill">
+                <details>
+                    <summary>Mindful Eating</summary>
+                    <p>Practice mindful eating to improve digestion and enjoyment of food.</p>
+                    <button onclick="toggleContent('mindful-content')">Start Practice</button>
+                    <div id="mindful-content" class="interactive-content">
+                        <p>Take a deep breath before eating and focus on the taste and texture.</p>
+                        <button onclick="startBreathingExercise()">Breathing Exercise</button>
+                        <p id="breathing-instruction"></p>
+                    </div>
                 </details>
             </div>
         </section>
@@ -380,6 +547,29 @@
             }, { threshold: 0.15 });
 
             sections.forEach(section => observer.observe(section));
+        }
+
+        function toggleContent(contentId) {
+            const content = document.getElementById(contentId);
+            content.classList.toggle('show');
+        }
+
+        function calculateWater() {
+            const weight = document.getElementById('weight').value;
+            if (weight) {
+                const waterIntake = weight * 0.03; // Rough estimate: 30ml per kg
+                document.getElementById('water-result').textContent = `Recommended daily water intake: ${waterIntake.toFixed(1)} liters`;
+            } else {
+                document.getElementById('water-result').textContent = 'Please enter your weight.';
+            }
+        }
+
+        function startBreathingExercise() {
+            const instruction = document.getElementById('breathing-instruction');
+            instruction.textContent = 'Breathe in slowly for 4 seconds...';
+            setTimeout(() => instruction.textContent = 'Hold for 4 seconds...', 4000);
+            setTimeout(() => instruction.textContent = 'Breathe out slowly for 4 seconds...', 8000);
+            setTimeout(() => instruction.textContent = 'Repeat as needed. Focus on your meal.', 12000);
         }
 
         window.onload = () => {
