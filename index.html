@@ -14,12 +14,18 @@
             margin: 0;
             padding: 0;
             line-height: 1.6;
+            background-color: #f4f8f5;
+            color: #1f3d2f;
         }
         header {
             background-color: #4CAF50;
             color: white;
             padding: 1rem;
             text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
         }
         nav ul {
             list-style: none;
@@ -28,34 +34,152 @@
             display: flex;
             justify-content: center;
             gap: 2rem;
+            flex-wrap: wrap;
         }
         nav a {
             color: white;
             text-decoration: none;
+            font-weight: 600;
         }
         main {
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
         }
+        .hero {
+            background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%);
+            color: white;
+            border-radius: 0 0 24px 24px;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            animation: float 8s ease-in-out infinite;
+        }
+        .hero h2 {
+            max-width: 700px;
+            margin: 0 auto 1rem;
+            font-size: clamp(2rem, 3vw, 3rem);
+            letter-spacing: 0.02em;
+        }
+        .hero p {
+            max-width: 680px;
+            margin: 0 auto 1.5rem;
+            opacity: 0.96;
+            font-size: 1.05rem;
+        }
+        .hero button {
+            background-color: white;
+            color: #4CAF50;
+            border: none;
+            border-radius: 999px;
+            padding: 0.9rem 1.8rem;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .hero button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.16);
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .feature-card,
+        .skill {
+            background-color: white;
+            border-radius: 16px;
+            padding: 1.4rem;
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(76, 175, 80, 0.15);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .feature-card:hover,
+        .skill:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 18px 32px rgba(0, 0, 0, 0.12);
+        }
+        .feature-card h3,
+        .skill summary {
+            color: #2f6f31;
+        }
+        .feature-card p,
+        .skill p {
+            margin-top: 0.75rem;
+        }
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1rem;
+            margin-bottom: 2rem;
         }
-        .skill {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 1rem;
-            background-color: #f9f9f9;
+        .skills-grid h2 {
+            grid-column: 1 / -1;
+            margin-bottom: 1rem;
+            color: #1f422d;
         }
         .skill summary {
             cursor: pointer;
             font-weight: bold;
-            color: #4CAF50;
         }
-        .skill p {
-            margin-top: 0.5rem;
+        .quiz-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+        #quiz-container {
+            background: linear-gradient(180deg, rgba(255,255,255,0.98), #f9fff8);
+            padding: 1.5rem;
+            border-radius: 18px;
+            border: 1px solid rgba(76, 175, 80, 0.12);
+        }
+        #options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        #options button {
+            background-color: #fff;
+            border: 1px solid rgba(76, 175, 80, 0.25);
+            color: #2f4d32;
+            border-radius: 12px;
+            padding: 0.9rem 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+            min-height: 58px;
+        }
+        #options button:hover {
+            background-color: #e8f7e8;
+            transform: translateY(-2px);
+        }
+        #next-btn {
+            margin-top: 1rem;
+            padding: 0.9rem 1.2rem;
+            border: none;
+            border-radius: 999px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        #next-btn:hover {
+            background-color: #3b9a3d;
+        }
+        #score {
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+        .fade-section {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         @media (max-width: 768px) {
             nav ul {
@@ -64,6 +188,9 @@
             }
             main {
                 padding: 1rem;
+            }
+            .hero {
+                padding: 2rem 1.2rem;
             }
         }
         footer {
@@ -76,6 +203,10 @@
             margin: 0 0.5rem;
             color: #4CAF50;
             text-decoration: none;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-7px); }
         }
     </style>
 </head>
@@ -92,11 +223,28 @@
         </nav>
     </header>
     <main>
-        <section id="home">
-            <h2>Welcome to Nutritive Skills</h2>
-            <p>Learn essential skills for healthy eating and nutrition.</p>
+        <section class="hero fade-section">
+            <p style="text-transform: uppercase; letter-spacing: 0.2em; opacity: 0.88; margin-bottom: 1rem;">Healthy nutrition made simple</p>
+            <h2>Build better eating habits with fun, guided learning.</h2>
+            <p>Explore free lessons, practical tips, and interactive tools designed to help you choose nourishing meals and feel your best.</p>
+            <button onclick="document.getElementById('skills').scrollIntoView({ behavior: 'smooth' })">Explore Skills</button>
         </section>
-        <section class="skills-grid">
+        <section class="feature-grid fade-section">
+            <div class="feature-card">
+                <h3>Quick guidance</h3>
+                <p>Easy-to-follow tips that help you shop smarter, cook healthier, and enjoy food more.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Interactive learning</h3>
+                <p>Try our mini quiz and learn from each answer while building confidence in nutrition.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Everyday habits</h3>
+                <p>Simple routines for portion control, label reading, and balanced meal planning.</p>
+            </div>
+        </section>
+        <section class="skills-grid fade-section" id="skills">
+            <h2>Featured learning topics</h2>
             <div class="skill">
                 <details>
                     <summary>Meal Planning</summary>
@@ -126,9 +274,9 @@
                 </details>
             </div>
         </section>
-        <section id="game" class="skill">
+        <section id="game" class="skill fade-section">
             <h2>Nutrition Quiz Game</h2>
-            <p>Test your knowledge with this quick quiz!</p>
+            <p>Test your knowledge with a quick quiz and learn new healthy habits along the way.</p>
             <div id="quiz-container">
                 <div id="question"></div>
                 <div id="options">
@@ -220,7 +368,24 @@
             loadQuestion();
         }
 
-        window.onload = loadQuestion;
+        function revealSections() {
+            const sections = document.querySelectorAll('.fade-section');
+            const observer = new IntersectionObserver((entries, observerRef) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observerRef.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            sections.forEach(section => observer.observe(section));
+        }
+
+        window.onload = () => {
+            loadQuestion();
+            revealSections();
+        };
     </script>
     <script>
         if ('serviceWorker' in navigator) {
