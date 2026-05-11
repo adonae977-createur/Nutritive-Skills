@@ -14,12 +14,18 @@
             margin: 0;
             padding: 0;
             line-height: 1.6;
+            background-color: #f4f8f5;
+            color: #1f3d2f;
         }
         header {
             background-color: #4CAF50;
             color: white;
             padding: 1rem;
             text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
         }
         nav ul {
             list-style: none;
@@ -28,15 +34,48 @@
             display: flex;
             justify-content: center;
             gap: 2rem;
+            flex-wrap: wrap;
         }
         nav a {
             color: white;
             text-decoration: none;
+            font-weight: 600;
         }
         main {
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        .about-card {
+            background-color: white;
+            border-radius: 18px;
+            padding: 1.5rem;
+            border: 1px solid rgba(76, 175, 80, 0.18);
+            box-shadow: 0 14px 26px rgba(0, 0, 0, 0.06);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .about-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 18px 30px rgba(0, 0, 0, 0.1);
+        }
+        .about-card h3 {
+            color: #2f6f31;
+            margin-top: 0;
+        }
+        .fade-section {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         @media (max-width: 768px) {
             nav ul {
@@ -72,19 +111,57 @@
         </nav>
     </header>
     <main>
-        <h2>About Nutritive Skills</h2>
-        <p>Nutritive Skills is a platform dedicated to helping you develop essential skills for healthy eating and nutrition. Our goal is to empower individuals with knowledge and tools to make informed dietary choices, improve their well-being, and lead healthier lives.</p>
-        <p>Through interactive lessons, quizzes, and practical tips, we cover topics such as meal planning, cooking techniques, reading food labels, and portion control. Whether you're a beginner or looking to refine your skills, our resources are designed to be engaging and accessible.</p>
-        <p>Join us on this journey to better nutrition!</p>
+        <section class="fade-section">
+            <h2>About Nutritive Skills</h2>
+            <p>Nutritive Skills is a platform dedicated to helping you develop essential skills for healthy eating and nutrition. Our goal is to empower individuals with knowledge and tools to make informed dietary choices, improve their well-being, and lead healthier lives.</p>
+        </section>
+        <section class="about-grid fade-section">
+            <div class="about-card">
+                <h3>Our mission</h3>
+                <p>Make nutrition education welcoming, practical, and available to everyone—no matter your experience in the kitchen.</p>
+            </div>
+            <div class="about-card">
+                <h3>What we teach</h3>
+                <p>Meal planning, healthy cooking techniques, label reading, portion control, and simple ways to build better daily habits.</p>
+            </div>
+            <div class="about-card">
+                <h3>Why it works</h3>
+                <p>Small changes add up. We help you take confident steps with clear explanations, helpful examples, and fun interactions.</p>
+            </div>
+        </section>
+        <section class="fade-section">
+            <h3>How we support you</h3>
+            <p>Through interactive lessons, quizzes, and practical tips, we create an engaging learning experience that helps you apply nutrition knowledge in everyday life.</p>
+            <ul>
+                <li>Simple explanations for real-world food choices</li>
+                <li>Practical tips for shopping, cooking, and portion control</li>
+                <li>Support for healthy habits that last</li>
+            </ul>
+        </section>
     </main>
     <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
+        function revealSections() {
+            const sections = document.querySelectorAll('.fade-section');
+            const observer = new IntersectionObserver((entries, observerRef) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observerRef.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            sections.forEach(section => observer.observe(section));
+        }
+
+        window.addEventListener('load', () => {
+            revealSections();
+            if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.register('service-worker.js')
                     .then(reg => console.log('ServiceWorker registered:', reg.scope))
                     .catch(err => console.log('ServiceWorker registration failed:', err));
-            });
-        }
+            }
+        });
     </script>
     <footer>
         <p>&copy; 2026 Minerva SASU. All rights reserved.</p>
