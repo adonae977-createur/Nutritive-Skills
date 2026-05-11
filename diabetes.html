@@ -4,50 +4,453 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#4CAF50">
+    <meta name="theme-color" content="#2D6A4F">
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="apple-touch-icon" href="icon.svg">
-    <title>Diabetic Nutritional Programs - Nutritive Skills</title>
+    <title>Diabetes Management Program - Nutritive</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            background-color: #f4f4f4;
+            color: #333;
+            background-color: #f8faf7;
         }
+        
         header {
-            background-color: #4CAF50;
+            background: linear-gradient(135deg, #2D6A4F 0%, #40916C 100%);
             color: white;
-            padding: 1rem;
-            text-align: center;
-            animation: slideDown 1s ease-out;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(45, 106, 79, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
-        @keyframes slideDown {
-            from { transform: translateY(-100%); }
-            to { transform: translateY(0); }
-        }
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 1rem 0 0 0;
+        
+        .header-content {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        nav {
+            display: flex;
             gap: 2rem;
         }
+        
         nav a {
             color: white;
             text-decoration: none;
+            font-weight: 500;
             transition: color 0.3s;
         }
+        
         nav a:hover {
-            color: #e8f5e8;
+            color: #D8F3DC;
         }
+        
         main {
             max-width: 1200px;
-            margin: 0 auto;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .page-title {
+            font-size: 2rem;
+            color: #2D6A4F;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, #40916C 0%, #52B788 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 16px;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+        
+        .hero-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-section p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+        
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .program-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+        }
+        
+        .program-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 24px rgba(45, 106, 79, 0.15);
+        }
+        
+        .program-header {
+            background: linear-gradient(135deg, #40916C 0%, #52B788 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .program-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .program-card h3 {
+            color: white;
+            margin: 0;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        
+        .program-body {
             padding: 2rem;
         }
+        
+        .program-body p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+        
+        .program-features {
+            background: #f8faf7;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .program-features h4 {
+            color: #2D6A4F;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+            color: #666;
+        }
+        
+        .feature-item::before {
+            content: "✓";
+            color: #40916C;
+            font-weight: bold;
+            margin-right: 0.75rem;
+            margin-top: 2px;
+        }
+        
+        .cta-button {
+            background-color: #FFB703;
+            color: #2D6A4F;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+        
+        .cta-button:hover {
+            background-color: #FFC520;
+            transform: translateY(-2px);
+        }
+        
+        .tips-section {
+            background: white;
+            padding: 3rem;
+            border-radius: 16px;
+            margin-bottom: 3rem;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .tips-section h2 {
+            color: #2D6A4F;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .tip-box {
+            padding: 1.5rem;
+            border-left: 4px solid #40916C;
+            background: #f8faf7;
+            border-radius: 8px;
+        }
+        
+        .tip-box h4 {
+            color: #2D6A4F;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .tip-box p {
+            color: #666;
+            line-height: 1.8;
+        }
+        
+        footer {
+            background: #f8faf7;
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 4rem;
+        }
+        
+        footer a {
+            color: #2D6A4F;
+            text-decoration: none;
+            margin: 0 1rem;
+        }
+        
+        .bottom-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 2px solid #f0f0f0;
+            display: flex;
+            justify-content: space-around;
+            padding: 0.5rem 0;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .nav-item {
+            text-align: center;
+            text-decoration: none;
+            color: #999;
+            transition: color 0.3s;
+            padding: 0.75rem 1rem;
+            flex: 1;
+        }
+        
+        .nav-item:hover {
+            color: #40916C;
+        }
+        
+        @media (max-width: 768px) {
+            .bottom-nav {
+                display: flex;
+            }
+            body {
+                padding-bottom: 80px;
+            }
+            main {
+                padding: 0 1rem;
+            }
+            .hero-section {
+                padding: 2rem 1.5rem;
+            }
+            nav {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">🥗 Nutritive</div>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="lessons.html">Lessons</a>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <h1 class="page-title">🏥 Diabetes Management Program</h1>
+        <p class="subtitle">Specialized nutrition guidance for managing diabetes and living a healthy life</p>
+        
+        <div class="hero-section">
+            <h2>Take Control of Your Diabetes with Nutritive</h2>
+            <p>Our comprehensive diabetes management program helps you understand nutrition, make smart food choices, and maintain healthy blood sugar levels.</p>
+        </div>
+
+        <div class="programs-grid">
+            <div class="program-card">
+                <div class="program-header">
+                    <div class="program-icon">🎯</div>
+                    <h3>Blood Sugar Management</h3>
+                </div>
+                <div class="program-body">
+                    <p>Learn how different foods affect your blood sugar levels and develop strategies to keep them stable.</p>
+                    <div class="program-features">
+                        <h4>Program includes:</h4>
+                        <div class="feature-item">Understanding glycemic index</div>
+                        <div class="feature-item">Carbohydrate counting basics</div>
+                        <div class="feature-item">Timing of meals and snacks</div>
+                        <div class="feature-item">Blood sugar monitoring tips</div>
+                    </div>
+                    <button class="cta-button">Start Program</button>
+                </div>
+            </div>
+
+            <div class="program-card">
+                <div class="program-header">
+                    <div class="program-icon">🍽️</div>
+                    <h3>Meal Planning for Diabetes</h3>
+                </div>
+                <div class="program-body">
+                    <p>Create balanced, diabetic-friendly meals that are delicious and help maintain stable blood sugar.</p>
+                    <div class="program-features">
+                        <h4>Program includes:</h4>
+                        <div class="feature-item">Balanced meal plate model</div>
+                        <div class="feature-item">Portion control strategies</div>
+                        <div class="feature-item">Healthy recipes collection</div>
+                        <div class="feature-item">Weekly meal planning guide</div>
+                    </div>
+                    <button class="cta-button">Start Program</button>
+                </div>
+            </div>
+
+            <div class="program-card">
+                <div class="program-header">
+                    <div class="program-icon">💪</div>
+                    <h3>Lifestyle & Exercise</h3>
+                </div>
+                <div class="program-body">
+                    <p>Combine nutrition with physical activity to improve insulin sensitivity and overall health.</p>
+                    <div class="program-features">
+                        <h4>Program includes:</h4>
+                        <div class="feature-item">Exercise recommendations</div>
+                        <div class="feature-item">Nutrition before & after exercise</div>
+                        <div class="feature-item">Weight management strategies</div>
+                        <div class="feature-item">Stress management tips</div>
+                    </div>
+                    <button class="cta-button">Start Program</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="tips-section">
+            <h2>💡 Diabetes Management Tips</h2>
+            <div class="tips-grid">
+                <div class="tip-box">
+                    <h4>Choose Whole Grains</h4>
+                    <p>Opt for whole wheat bread, brown rice, and oatmeal instead of refined carbohydrates to maintain stable blood sugar.</p>
+                </div>
+                <div class="tip-box">
+                    <h4>Eat More Fiber</h4>
+                    <p>Include vegetables, legumes, and whole grains to improve blood sugar control and digestive health.</p>
+                </div>
+                <div class="tip-box">
+                    <h4>Monitor Portion Sizes</h4>
+                    <p>Use the plate method: half vegetables, quarter protein, quarter whole grains for each meal.</p>
+                </div>
+                <div class="tip-box">
+                    <h4>Limit Sugar & Salt</h4>
+                    <p>Reduce sugary drinks, desserts, and processed foods. Choose herbs and spices for flavor instead.</p>
+                </div>
+                <div class="tip-box">
+                    <h4>Eat Regular Meals</h4>
+                    <p>Maintain consistent meal times to help regulate blood sugar levels throughout the day.</p>
+                </div>
+                <div class="tip-box">
+                    <h4>Stay Hydrated</h4>
+                    <p>Drink plenty of water and limit sugary beverages. Proper hydration supports kidney health.</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="background: linear-gradient(135deg, #40916C 0%, #52B788 100%); color: white; padding: 3rem; border-radius: 16px; text-align: center; margin-bottom: 3rem;">
+            <h2>Ready to Take Control?</h2>
+            <p style="margin: 1rem 0; font-size: 1.05rem;">Start your diabetes management journey today with our comprehensive nutrition programs.</p>
+            <button class="cta-button">Begin Your Journey</button>
+        </div>
+    </main>
+
+    <div class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <div style="font-size: 1.5rem;">🏠</div>
+            <div style="font-size: 0.75rem; margin-top: 0.25rem;">Home</div>
+        </a>
+        <a href="lessons.html" class="nav-item">
+            <div style="font-size: 1.5rem;">📚</div>
+            <div style="font-size: 0.75rem; margin-top: 0.25rem;">Lessons</div>
+        </a>
+        <a href="dashboard.html" class="nav-item">
+            <div style="font-size: 1.5rem;">📊</div>
+            <div style="font-size: 0.75rem; margin-top: 0.25rem;">Dashboard</div>
+        </a>
+        <a href="contact.html" class="nav-item">
+            <div style="font-size: 1.5rem;">👤</div>
+            <div style="font-size: 0.75rem; margin-top: 0.25rem;">Profile</div>
+        </a>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Nutritive. All rights reserved.</p>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="diabetes.html">Diabetes Programs</a>
+        </nav>
+    </footer>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(reg => console.log('ServiceWorker registered:', reg.scope))
+                    .catch(err => console.log('ServiceWorker registration failed:', err));
+            });
+        }
+    </script>
+</body>
+</html>
         .program {
             background: white;
             border-radius: 10px;
