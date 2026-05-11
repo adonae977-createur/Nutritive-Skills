@@ -4,99 +4,301 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#4CAF50">
+    <meta name="theme-color" content="#2D6A4F">
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="apple-touch-icon" href="icon.svg">
-    <title>Nutritive Skills</title>
+    <title>Nutritive - Your Health Journey Starts Here</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
+            color: #333;
+            background-color: #f8faf7;
         }
+        
+        /* Header & Navigation */
         header {
-            background-color: #4CAF50;
+            background: linear-gradient(135deg, #2D6A4F 0%, #40916C 100%);
             color: white;
-            padding: 1rem;
-            text-align: center;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(45, 106, 79, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 1rem 0 0 0;
+        
+        .header-content {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        
+        nav {
+            display: flex;
             gap: 2rem;
         }
+        
         nav a {
             color: white;
             text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s, opacity 0.3s;
+            font-size: 0.95rem;
         }
+        
+        nav a:hover {
+            color: #D8F3DC;
+            opacity: 0.9;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #2D6A4F 0%, #40916C 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 8px 24px rgba(45, 106, 79, 0.15);
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-button {
+            background-color: #FFB703;
+            color: #2D6A4F;
+            border: none;
+            padding: 12px 32px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(255, 183, 3, 0.3);
+        }
+        
+        .cta-button:hover {
+            background-color: #FFC520;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(255, 183, 3, 0.4);
+        }
+        
+        /* Main Container */
         main {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 0 2rem;
         }
-        .skills-grid {
+        
+        /* Food Categories Section */
+        .categories-section {
+            margin-bottom: 4rem;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            color: #2D6A4F;
+            margin-bottom: 2rem;
+            font-weight: 700;
+            text-align: center;
+        }
+        
+        .categories-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
         }
-        .skill {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 1rem;
-            background-color: #f9f9f9;
-        }
-        .skill summary {
+        
+        .category-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
             cursor: pointer;
-            font-weight: bold;
-            color: #4CAF50;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            border: 2px solid transparent;
         }
-        .skill p {
-            margin-top: 0.5rem;
+        
+        .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 24px rgba(45, 106, 79, 0.15);
+            border-color: #40916C;
         }
-        .quiz-btn {
-            background-color: #4CAF50;
+        
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .category-card h3 {
+            color: #2D6A4F;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        /* Features Section */
+        .features-section {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 16px;
+            margin-bottom: 4rem;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 1.5rem;
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card h3 {
+            color: #2D6A4F;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .feature-card p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        /* Insights Card */
+        .insights-card {
+            background: linear-gradient(135deg, #40916C 0%, #52B788 100%);
             color: white;
-            border: none;
-            padding: 10px;
-            margin: 5px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s, transform 0.2s;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 8px 24px rgba(45, 106, 79, 0.15);
         }
-        .quiz-btn:hover {
-            background-color: #45a049;
-            transform: scale(1.05);
+        
+        .insights-card h2 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
         }
-        .quiz-btn:active {
-            transform: scale(0.95);
+        
+        .insights-card p {
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
         }
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0);
-            }
-            40% {
-                transform: translateY(-10px);
-            }
-            60% {
-                transform: translateY(-5px);
-            }
+        
+        /* Bottom Navigation */
+        .bottom-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 2px solid #f0f0f0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 0.5rem 0;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.08);
         }
-        .correct {
-            animation: bounce 0.6s;
+        
+        .nav-item {
+            text-align: center;
+            text-decoration: none;
+            color: #999;
+            transition: color 0.3s;
+            padding: 0.75rem 1rem;
+            flex: 1;
         }
+        
+        .nav-item:hover {
+            color: #40916C;
+        }
+        
+        .nav-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .nav-label {
+            font-size: 0.75rem;
+            display: block;
+            margin-top: 0.25rem;
+        }
+        
+        /* Responsive Design */
         @media (max-width: 768px) {
-            nav ul {
-                flex-direction: column;
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            nav {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+            
+            nav a {
+                font-size: 0.85rem;
+            }
+            
+            .categories-grid {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
                 gap: 1rem;
             }
+            
             main {
-                padding: 1rem;
+                padding: 0 1rem;
+            }
+            
+            .bottom-nav {
+                display: flex;
+            }
+            
+            body {
+                padding-bottom: 80px;
             }
         }
+        
         #news article {
             margin-bottom: 1rem;
             padding: 1rem;
@@ -118,25 +320,186 @@
 </head>
 <body>
     <header>
-        <h1>Nutritive Skills For ALL FREE</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About us</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="diabetes.html">Diabetes Programs</a></li>
-                <li><a href="lessons.html">Quick Lessons</a></li>
-                <li><a href="dashboard.html">Progress Dashboard</a></li>
-            </ul>
-        </nav>
+        <div class="header-content">
+            <div class="logo">🥗 Nutritive</div>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="lessons.html">Lessons</a>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
     </header>
+
+    <section class="hero">
+        <h1>Take Health Into Your Own Hands</h1>
+        <p>Learn nutrition skills with expert guidance, interactive lessons, and daily insights. Start your journey to a healthier you today!</p>
+        <button class="cta-button">Get Started</button>
+    </section>
+
     <main>
-        <section id="home">
-            <h2>Welcome to Nutritive Skills</h2>
-            <p>Learn essential skills for healthy eating and nutrition.</p>
-            <p><em>A project by Minerva SASU, dedicated to promoting healthy lifestyles through education and fun.</em></p>
+        <!-- Food Categories Section -->
+        <section class="categories-section">
+            <h2 class="section-title">Explore Food Categories</h2>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <div class="category-icon">🥬</div>
+                    <h3>Vegetables</h3>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">🍎</div>
+                    <h3>Fruits</h3>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">🥜</div>
+                    <h3>Nuts</h3>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">🦞</div>
+                    <h3>Sea Food</h3>
+                </div>
+            </div>
         </section>
-        <section id="news">
+
+        <!-- Features Section -->
+        <section class="features-section">
+            <h2 class="section-title">Why Choose Nutritive?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Track Progress</h3>
+                    <p>Monitor your daily calorie intake and nutrition metrics with interactive charts and insights.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>Learn Skills</h3>
+                    <p>Master meal planning, cooking techniques, reading labels, and portion control.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Daily Insights</h3>
+                    <p>Get personalized nutrition recommendations and healthy lifestyle tips every day.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏥</div>
+                    <h3>Health Programs</h3>
+                    <p>Specialized programs for diabetes management and other health conditions.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Insights Card -->
+        <div class="insights-card">
+            <h2>Today's Calorie Insight</h2>
+            <p>Your daily calorie goal: <strong>2,000 kcal</strong> | Current intake: <strong>1,530 kcal</strong></p>
+            <button class="cta-button" style="background-color: white; color: #40916C;">View Full Dashboard</button>
+        </div>
+
+        <!-- Latest News Section -->
+        <section class="categories-section">
+            <h2 class="section-title">Latest News & Updates</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div style="background: white; padding: 2rem; border-radius: 16px; box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);">
+                    <h3 style="color: #2D6A4F;">New Nutrition Guidelines Released</h3>
+                    <p>Stay updated with the latest dietary recommendations. Learn how to incorporate more fruits and vegetables into your diet.</p>
+                    <small style="color: #999;">May 1, 2026</small>
+                </div>
+                <div style="background: white; padding: 2rem; border-radius: 16px; box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);">
+                    <h3 style="color: #2D6A4F;">Interactive Cooking Workshop</h3>
+                    <p>Join our virtual workshop on healthy cooking techniques. Discover easy ways to prepare nutritious meals at home.</p>
+                    <small style="color: #999;">April 15, 2026</small>
+                </div>
+                <div style="background: white; padding: 2rem; border-radius: 16px; box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);">
+                    <h3 style="color: #2D6A4F;">Minerva SASU's Wellness Commitment</h3>
+                    <p>We continue to innovate in nutrition education, bringing engaging tools and resources for holistic health.</p>
+                    <small style="color: #999;">March 20, 2026</small>
+                </div>
+            </div>
+        </section>
+        <!-- Skills & Quiz Section -->
+        <section class="categories-section">
+            <h2 class="section-title">Interactive Learning</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
+                <div style="background: white; padding: 2rem; border-radius: 16px; box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">🍽️</div>
+                    <h3 style="color: #2D6A4F; margin-bottom: 0.5rem;">Meal Planning</h3>
+                    <p>Plan balanced meals to ensure you get all necessary nutrients.</p>
+                    <button class="cta-button" style="margin-top: 1rem; padding: 8px 16px; font-size: 0.9rem;">Learn More</button>
+                </div>
+                <div style="background: white; padding: 2rem; border-radius: 16px; box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">👨‍🍳</div>
+                    <h3 style="color: #2D6A4F; margin-bottom: 0.5rem;">Cooking Techniques</h3>
+                    <p>Master basic cooking methods for healthier meals.</p>
+                    <button class="cta-button" style="margin-top: 1rem; padding: 8px 16px; font-size: 0.9rem;">Learn More</button>
+                </div>
+                <div style="background: white; padding: 2rem; border-radius: 16px; box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">🏷️</div>
+                    <h3 style="color: #2D6A4F; margin-bottom: 0.5rem;">Reading Labels</h3>
+                    <p>Understand food labels to make informed choices.</p>
+                    <button class="cta-button" style="margin-top: 1rem; padding: 8px 16px; font-size: 0.9rem;">Learn More</button>
+                </div>
+                <div style="background: white; padding: 2rem; border-radius: 16px; box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">📏</div>
+                    <h3 style="color: #2D6A4F; margin-bottom: 0.5rem;">Portion Control</h3>
+                    <p>Learn to control portions for a healthy weight.</p>
+                    <button class="cta-button" style="margin-top: 1rem; padding: 8px 16px; font-size: 0.9rem;">Learn More</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section class="features-section" style="background: linear-gradient(135deg, #40916C 0%, #52B788 100%); color: white; margin-bottom: 4rem;">
+            <h2 style="color: white; text-align: center; margin-bottom: 2rem;">Test Your Knowledge</h2>
+            <div id="quiz-container" style="max-width: 600px; margin: 0 auto;">
+                <div id="level" style="font-size: 0.9rem; opacity: 0.9; margin-bottom: 1rem;">Level: Easy</div>
+                <div id="question" style="font-size: 1.2rem; margin-bottom: 2rem; font-weight: 500;"></div>
+                <div id="options" style="display: grid; gap: 1rem; margin-bottom: 2rem;">
+                    <button id="option1" onclick="checkAnswer(0)" class="quiz-btn" style="background: white; color: #2D6A4F; padding: 12px;"></button>
+                    <button id="option2" onclick="checkAnswer(1)" class="quiz-btn" style="background: white; color: #2D6A4F; padding: 12px;"></button>
+                    <button id="option3" onclick="checkAnswer(2)" class="quiz-btn" style="background: white; color: #2D6A4F; padding: 12px;"></button>
+                    <button id="option4" onclick="checkAnswer(3)" class="quiz-btn" style="background: white; color: #2D6A4F; padding: 12px;"></button>
+                </div>
+                <div id="result" style="font-size: 1.1rem; margin-bottom: 1rem; font-weight: 500;"></div>
+                <button id="next-btn" onclick="nextQuestion()" style="display:none; background: #FFB703; color: #2D6A4F; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 600; cursor: pointer;">Next Question</button>
+                <div style="display: flex; justify-content: space-between; margin-top: 2rem; opacity: 0.9;">
+                    <div id="score">Score: 0</div>
+                    <div id="progress">Question 1 of 10</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Bottom Navigation (Mobile) -->
+    <div class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <div class="nav-icon">🏠</div>
+            <div class="nav-label">Home</div>
+        </a>
+        <a href="lessons.html" class="nav-item">
+            <div class="nav-icon">📚</div>
+            <div class="nav-label">Lessons</div>
+        </a>
+        <a href="dashboard.html" class="nav-item">
+            <div class="nav-icon">📊</div>
+            <div class="nav-label">Dashboard</div>
+        </a>
+        <a href="contact.html" class="nav-item">
+            <div class="nav-icon">👤</div>
+            <div class="nav-label">Profile</div>
+        </a>
+    </div>
+    
+    <footer style="background: #f8faf7; padding: 3rem 2rem; text-align: center; border-top: 1px solid #e0e0e0; margin-top: 4rem;">
+        <p style="color: #666; margin-bottom: 1rem;">&copy; 2026 Nutritive. All rights reserved. | A project by Minerva SASU</p>
+        <nav>
+            <a href="index.html" style="color: #2D6A4F; text-decoration: none; margin: 0 1rem;">Home</a>
+            <a href="about.html" style="color: #2D6A4F; text-decoration: none; margin: 0 1rem;">About</a>
+            <a href="contact.html" style="color: #2D6A4F; text-decoration: none; margin: 0 1rem;">Contact</a>
+            <a href="diabetes.html" style="color: #2D6A4F; text-decoration: none; margin: 0 1rem;">Diabetes Programs</a>
+        </nav>
+    </footer>
+        <section id="news" style="display: none;">
             <h2>Latest News</h2>
             <article>
                 <h3>New Nutrition Guidelines Released</h3>
@@ -154,7 +517,7 @@
                 <time datetime="2026-03-20">March 20, 2026</time>
             </article>
         </section>
-        <section class="skills-grid">
+        <section class="skills-grid" style="display: none;">
             <div class="skill">
                 <details>
                     <summary>Meal Planning</summary>
@@ -184,7 +547,7 @@
                 </details>
             </div>
         </section>
-        <section id="game" class="skill">
+        <section id="game" class="skill" style="display: none;">
             <h2>Nutrition Quiz Game</h2>
             <p>Test your knowledge with this quick quiz! Levels: Easy, Medium, Hard.</p>
             <div id="quiz-container">
@@ -287,24 +650,33 @@
             const q = questions[currentQuestion];
             const scoreEl = document.getElementById('score');
             if (selected === q.answer) {
-                document.getElementById('result').textContent = 'Correct!';
+                document.getElementById('result').textContent = '✓ Correct!';
+                document.getElementById('result').style.color = '#52B788';
                 score++;
                 scoreEl.textContent = 'Score: ' + score;
-                scoreEl.classList.add('correct');
-                setTimeout(() => scoreEl.classList.remove('correct'), 600);
             } else {
-                document.getElementById('result').textContent = 'Wrong! The correct answer is ' + q.options[q.answer];
+                document.getElementById('result').textContent = '✗ Wrong! The correct answer is ' + q.options[q.answer];
+                document.getElementById('result').style.color = '#FF6B6B';
                 scoreEl.textContent = 'Score: ' + score;
             }
             document.getElementById('next-btn').style.display = 'block';
         }
+                scoreEl.textContent = 'Score: ' + score;
+            } else {
+                document.getElementById('result').textContent = '✗ Wrong! The correct answer is ' + q.options[q.answer];
+                document.getElementById('result').style.color = '#FF6B6B';
+                scoreEl.textContent = 'Score: ' + score;
+            }
+            document.getElementById('next-btn').style.display = 'block';
+            }
 
         function nextQuestion() {
             currentQuestion++;
             if (currentQuestion < questions.length) {
                 loadQuestion();
             } else {
-                document.getElementById('quiz-container').innerHTML = '<h3>Quiz Complete!</h3><p>Your final score: ' + score + '/' + questions.length + '</p><button onclick="restartQuiz()">Play Again</button>';
+                const quizContainer = document.getElementById('quiz-container');
+                quizContainer.innerHTML = '<div style="text-align: center;"><h3 style="font-size: 1.5rem; margin-bottom: 1rem;">🎉 Quiz Complete!</h3><p style="font-size: 1.2rem; margin-bottom: 1.5rem;">Your final score: <strong>' + score + '/' + questions.length + '</strong></p><button onclick="restartQuiz()" style="background: #FFB703; color: #2D6A4F; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 600; cursor: pointer;">Play Again</button></div>';
             }
         }
 
@@ -312,38 +684,32 @@
             currentQuestion = 0;
             score = 0;
             document.getElementById('quiz-container').innerHTML = `
-                <div id="level">Level: Easy</div>
-                <div id="question"></div>
-                <div id="options">
-                    <button id="option1" onclick="checkAnswer(0)" class="quiz-btn"></button>
-                    <button id="option2" onclick="checkAnswer(1)" class="quiz-btn"></button>
-                    <button id="option3" onclick="checkAnswer(2)" class="quiz-btn"></button>
-                    <button id="option4" onclick="checkAnswer(3)" class="quiz-btn"></button>
+                <div id="level" style="font-size: 0.9rem; opacity: 0.9; margin-bottom: 1rem;">Level: Easy</div>
+                <div id="question" style="font-size: 1.2rem; margin-bottom: 2rem; font-weight: 500;"></div>
+                <div id="options" style="display: grid; gap: 1rem; margin-bottom: 2rem;">
+                    <button id="option1" onclick="checkAnswer(0)" class="quiz-btn" style="background: white; color: #2D6A4F; padding: 12px;"></button>
+                    <button id="option2" onclick="checkAnswer(1)" class="quiz-btn" style="background: white; color: #2D6A4F; padding: 12px;"></button>
+                    <button id="option3" onclick="checkAnswer(2)" class="quiz-btn" style="background: white; color: #2D6A4F; padding: 12px;"></button>
+                    <button id="option4" onclick="checkAnswer(3)" class="quiz-btn" style="background: white; color: #2D6A4F; padding: 12px;"></button>
                 </div>
-                <div id="result"></div>
-                <button id="next-btn" onclick="nextQuestion()" style="display:none;">Next Question</button>
-                <div id="score">Score: 0</div>
-                <div id="progress">Question 1 of 10</div>
+                <div id="result" style="font-size: 1.1rem; margin-bottom: 1rem; font-weight: 500;"></div>
+                <button id="next-btn" onclick="nextQuestion()" style="display:none; background: #FFB703; color: #2D6A4F; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 600; cursor: pointer;">Next Question</button>
+                <div style="display: flex; justify-content: space-between; margin-top: 2rem; opacity: 0.9;">
+                    <div id="score">Score: 0</div>
+                    <div id="progress">Question 1 of 10</div>
+                </div>
             `;
             loadQuestion();
         }
 
-        window.onload = loadQuestion;
-    </script>
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
+        window.onload = function() {
+            loadQuestion();
+            if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.register('service-worker.js')
                     .then(reg => console.log('ServiceWorker registered:', reg.scope))
                     .catch(err => console.log('ServiceWorker registration failed:', err));
-            });
-        }
+            }
+        };
     </script>
-    <footer>
-        <p>&copy; 2026 Minerva SASU. All rights reserved.</p>
-        <nav>
-            <a href="index.html">Home</a> | <a href="about.html">About</a> | <a href="contact.html">Contact</a> | <a href="diabetes.html">Diabetes Programs</a> | <a href="lessons.html">Quick Lessons</a> | <a href="dashboard.html">Progress Dashboard</a>
-        </nav>
-    </footer>
 </body>
 </html>
